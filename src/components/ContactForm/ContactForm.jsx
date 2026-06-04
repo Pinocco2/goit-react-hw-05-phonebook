@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operations';
 import { nanoid } from '@reduxjs/toolkit';
 import css from './ContactForm.module.css';
 
@@ -8,7 +8,7 @@ export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -32,7 +32,7 @@ export const ContactForm = () => {
     dispatch(addContact({ id: nanoid(), name, number }));
 
     setName('');
-    number('');
+    setNumber('');
   };
 
   return (
